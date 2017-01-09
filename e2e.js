@@ -42,8 +42,6 @@ describe('Users can search and get the correct results', function () {
   });
 
   it('user can go from portfolio to search', function () {
-    Page.visitPortfolio();
-
     Page.searchLink.scrollTo().click();
     expect(browser.getCurrentUrl()).toEqual(ROOT + SEARCH);
     expect(Page.bannerText === "Portfolio");
@@ -51,7 +49,6 @@ describe('Users can search and get the correct results', function () {
   });
 
   it('user can search and get the correct results', function () {
-    Page.visitSearch();
     const query = 'beanstream-payment';
 
     Page.advancedSearchButton.scrollTo().click();
@@ -66,10 +63,8 @@ describe('Users can search and get the correct results', function () {
     expect(Page.resultCount).toBeGreaterThan(0);
     expect(Page.resultText).toEqual('Hobby Wholesale (HWS)');
   });
-  
-  it('user can follow link to page', function () {
-    Page.visitSearch();
 
+  it('user can follow link to page', function () {
     Page.details.getAttribute('href')
     .then(function (attr) {
       expect(typeof attr).toBe('string');
