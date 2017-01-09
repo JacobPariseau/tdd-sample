@@ -1,0 +1,21 @@
+{
+  "name": "tdd-sample",
+  "version": "1.0.0",
+  "description": "Test framework",
+  "main": "conf.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "protractor conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobPariseau/tdd-sample.git"
+  },
+  "author": "Jacob Pariseau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobPariseau/tdd-sample/issues"
+  },
+  "homepage": "https://github.com/JacobPariseau/tdd-sample#readme"
+}

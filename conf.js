@@ -1,6 +1,14 @@
+var HtmlReporter = require('protractor-html-screenshot-reporter');
+
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [],
+  onPrepare: function() {
+     // Add a screenshot reporter and store screenshots to `/tmp/screnshots`:
+     jasmine.getEnv().addReporter(new HtmlReporter({
+        baseDirectory: '/tmp/screenshots'
+     }));
+  },
   multiCapabilities: [
   {
     'browserName': 'chrome',
@@ -9,7 +17,7 @@ exports.config = {
       args: ['--lang=en',
              '--window-size=1000,800']
    },
-   specs: ['microtek.js']
+   specs: ['e2e.js']
   },{
     'browserName': 'chrome',
     'name': 'Small',
@@ -17,6 +25,6 @@ exports.config = {
      args: ['--lang=en',
             '--window-size=320,480']
     },
-    specs: ['microtek.js']
+    specs: ['e2e.js']
   }]
 };
