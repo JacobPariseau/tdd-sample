@@ -37,7 +37,7 @@ describe('Users can search and get the correct results', function () {
       // Test should search for elements on the page that only exist on the portfolio page, and expect those elements to be displayed.
 
       expect(browser.getCurrentUrl()).toEqual(ROOT + PORTFOLIO);
-      expect($('.container h1').innerHTML === "Design &amp; Development Porfolio");
+      expect(Page.bannerText === "Design &amp; Development Porfolio");
     });
   });
 
@@ -46,8 +46,27 @@ describe('Users can search and get the correct results', function () {
 
     Page.searchLink.scrollTo().click();
     expect(browser.getCurrentUrl()).toEqual(ROOT + SEARCH);
+    expect(Page.bannerText === "Portfolio");
+    expect(Page.advancedSearchButton.isPresent);
   });
 
+  it('user can search and get the correct results', function () {
+    Page.visitSearch();
+    const query = 'beanstream-payment';
+
+    Page.advancedSearchButton.scrollTo().click();
+    Page.searchInput.sendKeys(query);
+    Page.searchGo.click();
+
+    expect(browser.getCurrentUrl()
+    .then(function(url) {
+      return url.split('?search=')[1] === query;
+    }))
+    .toEqual(true);
+    expect(Page.resultCount).toBeGreaterThan(0);
+    expect(Page.resultText).toEqual('Hobby Wholesale (HWS)');
+  });
+  
   it('user can follow link to page', function () {
     Page.visitSearch();
 
@@ -60,27 +79,5 @@ describe('Users can search and get the correct results', function () {
 
       expect(browser.getCurrentUrl()).toEqual(attr);
     });
-  });
-
-  it('user can execute a search', function () {
-    Page.visitSearch();
-    const query = 'beanstream-payment';
-
-    Page.advancedSearchButton.scrollTo().click();
-    Page.searchInput.sendKeys(query);
-    Page.searchGo.click();
-
-    expect(browser.getCurrentUrl()
-    .then(function(url) {
-      return url.split('?search=')[1] === query;
-    }));
-  });
-
-  it('search returns correct results', function () {
-    const query = 'beanstream-payment';
-    Page.visitSearch(query);
-
-    expect(Page.resultCount).toBeGreaterThan(0);
-    expect(Page.resultText).toEqual('Hobby Wholesale (HWS)');
   });
 });

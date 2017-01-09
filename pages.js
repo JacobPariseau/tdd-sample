@@ -18,6 +18,9 @@ const Page = {
   get searchLink() {
     return $('[href="/'+SEARCH+'"]');
   },
+  get bannerText() {
+    return $('.container h1').innerHTML;
+  },
   //Search elements
   get details() {
     return $('.details_btn');
